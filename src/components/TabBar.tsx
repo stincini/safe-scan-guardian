@@ -1,6 +1,6 @@
 import { Home, BookOpen, Users, Shield } from "lucide-react";
 
-type Tab = "home" | "scan-result" | "education" | "caregiver";
+type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver";
 
 interface TabBarProps {
   active: Tab;
