@@ -1,13 +1,44 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import IPhoneFrame from "@/components/IPhoneFrame";
+import TabBar from "@/components/TabBar";
+import HomeScreen from "@/components/screens/HomeScreen";
+import ScanResultScreen from "@/components/screens/ScanResultScreen";
+import EducationScreen from "@/components/screens/EducationScreen";
+import CaregiverScreen from "@/components/screens/CaregiverScreen";
+
+type Tab = "home" | "scan-result" | "education" | "caregiver";
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState<Tab>("home");
+
+  const renderScreen = () => {
+    switch (activeTab) {
+      case "home":
+        return (
+          <HomeScreen
+            onScan={() => setActiveTab("scan-result")}
+            onEducation={() => setActiveTab("education")}
+            onCaregiver={() => setActiveTab("caregiver")}
+          />
+        );
+      case "scan-result":
+        return <ScanResultScreen onBack={() => setActiveTab("home")} />;
+      case "education":
+        return <EducationScreen onBack={() => setActiveTab("home")} />;
+      case "caregiver":
+        return <CaregiverScreen onBack={() => setActiveTab("home")} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <IPhoneFrame>
+      <div className="flex flex-col h-full">
+        <div className="flex-1 overflow-y-auto">{renderScreen()}</div>
+        <TabBar active={activeTab} onChange={setActiveTab} />
       </div>
-    </div>
+    </IPhoneFrame>
   );
 };
 
