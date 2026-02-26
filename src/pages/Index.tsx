@@ -9,7 +9,8 @@ import CaregiverScreen from "@/components/screens/CaregiverScreen";
 import RiskDashboardScreen from "@/components/screens/RiskDashboardScreen";
 import PrivacyOnboardingScreen from "@/components/screens/PrivacyOnboardingScreen";
 import CaregiverOnboardingScreen from "@/components/screens/CaregiverOnboardingScreen";
-import SettingsScreen from "@/components/screens/SettingsScreen";
+import ProtectedSettingsScreen from "@/components/screens/ProtectedSettingsScreen";
+import CaregiverSettingsScreen from "@/components/screens/CaregiverSettingsScreen";
 import ScreenshotDetectionSheet from "@/components/screens/ScreenshotDetectionSheet";
 import QuizOfTheDayScreen from "@/components/screens/QuizOfTheDayScreen";
 import LessonDetailScreen from "@/components/screens/LessonDetailScreen";
@@ -74,7 +75,9 @@ const Index = () => {
       case "caregiver-onboarding":
         return <CaregiverOnboardingScreen onBack={() => setActiveTab("caregiver")} onComplete={() => setActiveTab("caregiver")} />;
       case "settings":
-        return <SettingsScreen onBack={() => setActiveTab(appMode === "caregiver" ? "caregiver" : "home")} onCaregiverOnboarding={() => setActiveTab("caregiver-onboarding")} />;
+        return appMode === "caregiver"
+          ? <CaregiverSettingsScreen onBack={() => setActiveTab("caregiver")} />
+          : <ProtectedSettingsScreen onBack={() => setActiveTab("home")} onCaregiverOnboarding={() => setActiveTab("caregiver-onboarding")} />;
       default:
         return null;
     }
