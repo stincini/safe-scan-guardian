@@ -1,6 +1,6 @@
-import { Home, BookOpen, Users, Shield } from "lucide-react";
+import { Home, BookOpen, Users, Shield, Settings, BarChart3 } from "lucide-react";
 
-type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver";
+type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings";
 
 interface TabBarProps {
   active: Tab;
@@ -9,9 +9,10 @@ interface TabBarProps {
 
 const tabs = [
   { id: "home" as const, label: "Home", icon: Home },
-  { id: "scan-result" as const, label: "Scan", icon: Shield },
+  { id: "dashboard" as const, label: "Risk", icon: BarChart3 },
   { id: "education" as const, label: "Learn", icon: BookOpen },
   { id: "caregiver" as const, label: "Family", icon: Users },
+  { id: "settings" as const, label: "Settings", icon: Settings },
 ];
 
 const TabBar = ({ active, onChange }: TabBarProps) => {
