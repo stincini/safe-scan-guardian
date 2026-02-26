@@ -1,9 +1,10 @@
-import { Shield, Camera, Image, ChevronRight } from "lucide-react";
+import { Shield, Camera, Image, ChevronRight, AlertTriangle, TrendingUp, HandMetal } from "lucide-react";
 
 interface HomeScreenProps {
   onScan: () => void;
   onEducation: () => void;
   onCaregiver: () => void;
+  onDashboard: () => void;
 }
 
 const recentScans = [
@@ -24,11 +25,17 @@ const verdictLabels = {
   danger: "Scam",
 };
 
-const HomeScreen = ({ onScan, onEducation, onCaregiver }: HomeScreenProps) => {
+const trendingScams = [
+  "IRS impersonation emails",
+  "Gift card payment requests",
+  "Grandchild emergency calls",
+];
+
+const HomeScreen = ({ onScan, onEducation, onCaregiver, onDashboard }: HomeScreenProps) => {
   return (
     <div className="px-6 pb-6">
       {/* Header */}
-      <div className="pt-4 pb-6">
+      <div className="pt-4 pb-4">
         <div className="flex items-center gap-3 mb-1">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
             <Shield className="w-5 h-5 text-primary" />
@@ -40,35 +47,68 @@ const HomeScreen = ({ onScan, onEducation, onCaregiver }: HomeScreenProps) => {
         </div>
       </div>
 
-      {/* Main CTA */}
+      {/* Before You Click — Primary CTA */}
       <button
         onClick={onScan}
         className="w-full bg-primary text-primary-foreground rounded-2xl p-6 shadow-soft active:scale-[0.98] transition-transform mb-4"
       >
         <div className="flex flex-col items-center gap-3">
           <div className="w-16 h-16 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-            <Shield className="w-8 h-8" />
+            <HandMetal className="w-8 h-8" />
           </div>
-          <span className="text-xl font-bold font-display">Check if this is a scam</span>
-          <span className="text-sm opacity-80">Upload a screenshot or photo</span>
+          <span className="text-xl font-bold font-display">Before You Click, Check Here</span>
+          <span className="text-sm opacity-80">No rush. Let's make sure it's safe first.</span>
         </div>
       </button>
 
       {/* Quick actions */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <button className="bg-card rounded-xl p-4 shadow-card flex flex-col items-center gap-2 active:scale-[0.98] transition-transform">
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <button onClick={onScan} className="bg-card rounded-xl p-4 shadow-card flex flex-col items-center gap-2 active:scale-[0.98] transition-transform">
           <Camera className="w-6 h-6 text-primary" />
           <span className="text-sm font-semibold text-foreground">Take Photo</span>
         </button>
-        <button className="bg-card rounded-xl p-4 shadow-card flex flex-col items-center gap-2 active:scale-[0.98] transition-transform">
+        <button onClick={onScan} className="bg-card rounded-xl p-4 shadow-card flex flex-col items-center gap-2 active:scale-[0.98] transition-transform">
           <Image className="w-6 h-6 text-primary" />
           <span className="text-sm font-semibold text-foreground">From Photos</span>
         </button>
       </div>
 
+      {/* Risk Intelligence Dashboard Card */}
+      <button
+        onClick={onDashboard}
+        className="w-full bg-card rounded-2xl p-4 shadow-card mb-4 active:scale-[0.98] transition-transform text-left"
+      >
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base font-bold font-display text-foreground">Today's Scam Risk</h2>
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-suspicious-light text-suspicious">
+            Medium
+          </span>
+        </div>
+        <div className="flex items-start gap-3 mb-3">
+          <AlertTriangle className="w-5 h-5 text-suspicious shrink-0 mt-0.5" />
+          <p className="text-sm text-muted-foreground">
+            IRS-themed scams are surging this week. Stay alert for emails claiming you owe back taxes.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-muted-foreground" />
+          <div className="flex flex-wrap gap-1.5">
+            {trendingScams.map((scam) => (
+              <span key={scam} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                {scam}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center justify-end mt-2">
+          <span className="text-xs font-semibold text-primary">View full dashboard</span>
+          <ChevronRight className="w-3.5 h-3.5 text-primary" />
+        </div>
+      </button>
+
       {/* Recent Scans */}
       <div className="mb-4">
-        <h2 className="text-lg font-bold font-display text-foreground mb-3">Recent Scans</h2>
+        <h2 className="text-base font-bold font-display text-foreground mb-3">Recent Scans</h2>
         <div className="space-y-2">
           {recentScans.map((scan) => (
             <div

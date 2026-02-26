@@ -140,6 +140,17 @@ const ScanResultScreen = ({ onBack, verdict = "danger" }: ScanResultScreenProps)
         </div>
       </div>
 
+      {/* Notify caregiver (high-risk only) */}
+      {verdict === "danger" && (
+        <div className="bg-suspicious-light rounded-xl p-4 mb-4 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+          <p className="text-sm font-bold text-foreground mb-2">🛡️ Want to notify your trusted contact?</p>
+          <p className="text-xs text-muted-foreground mb-3">We'll send them a safety summary — no message content is shared unless you approve.</p>
+          <button className="w-full bg-suspicious text-primary-foreground rounded-xl p-3 font-bold text-sm active:scale-[0.98] transition-transform">
+            Notify My Caregiver
+          </button>
+        </div>
+      )}
+
       {/* Call trusted contact */}
       <button className="w-full bg-primary text-primary-foreground rounded-xl p-4 flex items-center justify-center gap-2 font-bold text-base active:scale-[0.98] transition-transform shadow-soft">
         <Phone className="w-5 h-5" />
