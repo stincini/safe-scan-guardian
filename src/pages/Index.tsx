@@ -11,11 +11,14 @@ import PrivacyOnboardingScreen from "@/components/screens/PrivacyOnboardingScree
 import CaregiverOnboardingScreen from "@/components/screens/CaregiverOnboardingScreen";
 import SettingsScreen from "@/components/screens/SettingsScreen";
 import ScreenshotDetectionSheet from "@/components/screens/ScreenshotDetectionSheet";
+import QuizOfTheDayScreen from "@/components/screens/QuizOfTheDayScreen";
+import LessonDetailScreen from "@/components/screens/LessonDetailScreen";
 
-type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings";
+type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings" | "quiz" | "lesson";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>("privacy-onboarding");
+  const [activeLessonId, setActiveLessonId] = useState<number>(1);
   const [showScreenshotSheet, setShowScreenshotSheet] = useState(false);
 
   const handleScanComplete = useCallback(() => {
@@ -53,7 +56,11 @@ const Index = () => {
       case "scan-result":
         return <ScanResultScreen onBack={() => setActiveTab("home")} />;
       case "education":
-        return <EducationScreen onBack={() => setActiveTab("home")} />;
+        return <EducationScreen onBack={() => setActiveTab("home")} onQuiz={() => setActiveTab("quiz")} onLesson={(id) => { setActiveLessonId(id); setActiveTab("lesson"); }} />;
+      case "quiz":
+        return <QuizOfTheDayScreen onBack={() => setActiveTab("education")} />;
+      case "lesson":
+        return <LessonDetailScreen lessonId={activeLessonId} onBack={() => setActiveTab("education")} onComplete={() => {}} />;
       case "caregiver":
         return <CaregiverScreen onBack={() => setActiveTab("home")} />;
       case "dashboard":
