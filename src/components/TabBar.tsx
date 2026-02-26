@@ -19,7 +19,7 @@ const protectedTabs = [
 
 const caregiverTabs = [
   { id: "caregiver" as const, label: "Dashboard", icon: Home },
-  { id: "education" as const, label: "Learn", icon: BookOpen },
+  { id: "dashboard" as const, label: "Risk", icon: BarChart3 },
   { id: "settings" as const, label: "Settings", icon: Settings },
 ];
 
