@@ -1,6 +1,6 @@
 import { Home, BookOpen, Users, Shield, Settings, BarChart3 } from "lucide-react";
 
-type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings";
+type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings" | "quiz" | "lesson";
 
 interface TabBarProps {
   active: Tab;
