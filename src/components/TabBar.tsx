@@ -1,13 +1,15 @@
-import { Home, BookOpen, Users, Shield, Settings, BarChart3 } from "lucide-react";
+import { Home, BookOpen, Users, Settings, BarChart3 } from "lucide-react";
+import type { AppMode } from "@/components/screens/PrivacyOnboardingScreen";
 
 type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings" | "quiz" | "lesson";
 
 interface TabBarProps {
   active: Tab;
   onChange: (tab: Tab) => void;
+  mode: AppMode;
 }
 
-const tabs = [
+const protectedTabs = [
   { id: "home" as const, label: "Home", icon: Home },
   { id: "dashboard" as const, label: "Risk", icon: BarChart3 },
   { id: "education" as const, label: "Learn", icon: BookOpen },
@@ -15,7 +17,15 @@ const tabs = [
   { id: "settings" as const, label: "Settings", icon: Settings },
 ];
 
-const TabBar = ({ active, onChange }: TabBarProps) => {
+const caregiverTabs = [
+  { id: "caregiver" as const, label: "Dashboard", icon: Home },
+  { id: "education" as const, label: "Learn", icon: BookOpen },
+  { id: "settings" as const, label: "Settings", icon: Settings },
+];
+
+const TabBar = ({ active, onChange, mode }: TabBarProps) => {
+  const tabs = mode === "caregiver" ? caregiverTabs : protectedTabs;
+
   return (
     <div className="sticky bottom-0 bg-card/95 backdrop-blur-md border-t border-border px-2 pb-6 pt-2 shrink-0">
       <div className="flex items-center justify-around">

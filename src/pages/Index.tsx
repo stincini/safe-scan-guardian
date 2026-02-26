@@ -13,16 +13,23 @@ import SettingsScreen from "@/components/screens/SettingsScreen";
 import ScreenshotDetectionSheet from "@/components/screens/ScreenshotDetectionSheet";
 import QuizOfTheDayScreen from "@/components/screens/QuizOfTheDayScreen";
 import LessonDetailScreen from "@/components/screens/LessonDetailScreen";
+import type { AppMode } from "@/components/screens/PrivacyOnboardingScreen";
 
 type Tab = "home" | "scanning" | "scan-result" | "education" | "caregiver" | "dashboard" | "privacy-onboarding" | "caregiver-onboarding" | "settings" | "quiz" | "lesson";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>("privacy-onboarding");
+  const [appMode, setAppMode] = useState<AppMode>("protected");
   const [activeLessonId, setActiveLessonId] = useState<number>(1);
   const [showScreenshotSheet, setShowScreenshotSheet] = useState(false);
 
   const handleScanComplete = useCallback(() => {
     setActiveTab("scan-result");
+  }, []);
+
+  const handleOnboardingComplete = useCallback((mode: AppMode) => {
+    setAppMode(mode);
+    setActiveTab(mode === "caregiver" ? "caregiver" : "home");
   }, []);
 
   // Simulate screenshot detection after 8 seconds on home
@@ -37,11 +44,10 @@ const Index = () => {
     }
   }, [activeTab]);
 
-
   const renderScreen = () => {
     switch (activeTab) {
       case "privacy-onboarding":
-        return <PrivacyOnboardingScreen onComplete={() => setActiveTab("home")} />;
+        return <PrivacyOnboardingScreen onComplete={handleOnboardingComplete} />;
       case "home":
         return (
           <HomeScreen
@@ -56,7 +62,7 @@ const Index = () => {
       case "scan-result":
         return <ScanResultScreen onBack={() => setActiveTab("home")} />;
       case "education":
-        return <EducationScreen onBack={() => setActiveTab("home")} onQuiz={() => setActiveTab("quiz")} onLesson={(id) => { setActiveLessonId(id); setActiveTab("lesson"); }} />;
+        return <EducationScreen onBack={() => setActiveTab(appMode === "caregiver" ? "caregiver" : "home")} onQuiz={() => setActiveTab("quiz")} onLesson={(id) => { setActiveLessonId(id); setActiveTab("lesson"); }} />;
       case "quiz":
         return <QuizOfTheDayScreen onBack={() => setActiveTab("education")} />;
       case "lesson":
@@ -68,7 +74,7 @@ const Index = () => {
       case "caregiver-onboarding":
         return <CaregiverOnboardingScreen onBack={() => setActiveTab("caregiver")} onComplete={() => setActiveTab("caregiver")} />;
       case "settings":
-        return <SettingsScreen onBack={() => setActiveTab("home")} onCaregiverOnboarding={() => setActiveTab("caregiver-onboarding")} />;
+        return <SettingsScreen onBack={() => setActiveTab(appMode === "caregiver" ? "caregiver" : "home")} onCaregiverOnboarding={() => setActiveTab("caregiver-onboarding")} />;
       default:
         return null;
     }
@@ -80,7 +86,7 @@ const Index = () => {
     <IPhoneFrame>
       <div className="flex flex-col h-full">
         <div className="flex-1 overflow-y-auto">{renderScreen()}</div>
-        {showTabBar && <TabBar active={activeTab} onChange={setActiveTab} />}
+        {showTabBar && <TabBar active={activeTab} onChange={setActiveTab} mode={appMode} />}
       </div>
       {showScreenshotSheet && (
         <ScreenshotDetectionSheet
