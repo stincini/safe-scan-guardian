@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import IPhoneFrame from "@/components/IPhoneFrame";
 import TabBar from "@/components/TabBar";
 import HomeScreen from "@/components/screens/HomeScreen";
@@ -23,12 +23,17 @@ const Index = () => {
   }, []);
 
   // Simulate screenshot detection after 8 seconds on home
-  const handleHomeMount = useCallback(() => {
-    const timeout = setTimeout(() => {
-      setShowScreenshotSheet(true);
-    }, 8000);
-    return () => clearTimeout(timeout);
-  }, []);
+  const hasShownSheet = useRef(false);
+  useEffect(() => {
+    if (activeTab === "home" && !hasShownSheet.current) {
+      const timeout = setTimeout(() => {
+        setShowScreenshotSheet(true);
+        hasShownSheet.current = true;
+      }, 8000);
+      return () => clearTimeout(timeout);
+    }
+  }, [activeTab]);
+
 
   const renderScreen = () => {
     switch (activeTab) {
