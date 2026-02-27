@@ -9,6 +9,7 @@ import CaregiverScreen from "@/components/screens/CaregiverScreen";
 import RiskDashboardScreen from "@/components/screens/RiskDashboardScreen";
 import PrivacyOnboardingScreen from "@/components/screens/PrivacyOnboardingScreen";
 import CaregiverOnboardingScreen from "@/components/screens/CaregiverOnboardingScreen";
+import ProtectedCaregiverScreen from "@/components/screens/ProtectedCaregiverScreen";
 import ProtectedSettingsScreen from "@/components/screens/ProtectedSettingsScreen";
 import CaregiverSettingsScreen from "@/components/screens/CaregiverSettingsScreen";
 import ScreenshotDetectionSheet from "@/components/screens/ScreenshotDetectionSheet";
@@ -69,7 +70,7 @@ const Index = () => {
       case "lesson":
         return <LessonDetailScreen lessonId={activeLessonId} onBack={() => setActiveTab("education")} onComplete={() => {}} />;
       case "caregiver":
-        return appMode === "caregiver" ? <CaregiverScreen /> : <CaregiverScreen onBack={() => setActiveTab("home")} />;
+        return appMode === "caregiver" ? <CaregiverScreen /> : <ProtectedCaregiverScreen onCaregiverOnboarding={() => setActiveTab("caregiver-onboarding")} />;
       case "dashboard":
         return <RiskDashboardScreen onBack={() => setActiveTab("home")} />;
       case "caregiver-onboarding":
