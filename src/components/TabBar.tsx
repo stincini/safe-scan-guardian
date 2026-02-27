@@ -13,7 +13,7 @@ const protectedTabs = [
   { id: "home" as const, label: "Home", icon: Home },
   { id: "dashboard" as const, label: "Risk", icon: BarChart3 },
   { id: "education" as const, label: "Learn", icon: BookOpen },
-  { id: "caregiver" as const, label: "Family", icon: Users },
+  { id: "caregiver" as const, label: "Caregiver", icon: Users },
   { id: "settings" as const, label: "Settings", icon: Settings },
 ];
 
