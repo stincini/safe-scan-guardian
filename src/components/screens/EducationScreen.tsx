@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronRight, CheckCircle, Sparkles, Trophy } from "lucide-react";
+import PappyAssistant from "@/components/PappyAssistant";
 
 interface EducationScreenProps {
   onBack: () => void;
@@ -28,6 +29,15 @@ const EducationScreen = ({ onBack, onQuiz, onLesson }: EducationScreenProps) => 
           <ArrowLeft className="w-5 h-5 text-foreground" />
         </button>
         <h1 className="text-lg font-bold font-display text-foreground">Learn About Scams</h1>
+      </div>
+
+      {/* Pappy Assistant */}
+      <div className="mb-4">
+        <PappyAssistant
+          state={completedCount >= lessons.length ? "celebrating" : "teaching"}
+          message={completedCount >= lessons.length ? "You've finished all the lessons! 🎉" : "Let's learn how to spot scams!"}
+          size="md"
+        />
       </div>
 
       {/* Quiz of the Day Card */}

@@ -1,4 +1,6 @@
 import { Shield, ShieldAlert, ShieldX, AlertTriangle, Phone, Ban, Flag, ArrowLeft, ExternalLink } from "lucide-react";
+import PappyAssistant from "@/components/PappyAssistant";
+import type { PappyState } from "@/components/PappyAssistant";
 
 type Verdict = "safe" | "suspicious" | "danger";
 
@@ -44,9 +46,16 @@ const flags = [
   { icon: Ban, label: "Asks for gift card payment", detail: "Legitimate agencies never ask for gift cards" },
 ];
 
+const verdictToPappyState: Record<Verdict, PappyState> = {
+  safe: "safe",
+  suspicious: "suspicious",
+  danger: "danger",
+};
+
 const ScanResultScreen = ({ onBack, verdict = "danger" }: ScanResultScreenProps) => {
   const config = verdictConfig[verdict];
   const Icon = config.icon;
+  const pappyState = verdictToPappyState[verdict];
 
   return (
     <div className="px-6 pb-6">
@@ -81,6 +90,11 @@ const ScanResultScreen = ({ onBack, verdict = "danger" }: ScanResultScreenProps)
             <p className={`text-sm font-bold mt-1 ${config.color}`}>Risk score: {config.riskScore}/100</p>
           </div>
         </div>
+      </div>
+
+      {/* Pappy Assistant */}
+      <div className="mb-4">
+        <PappyAssistant state={pappyState} riskScore={config.riskScore} size="md" />
       </div>
 
       {/* Explanation */}

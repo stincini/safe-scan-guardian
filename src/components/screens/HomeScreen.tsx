@@ -1,4 +1,5 @@
 import { Shield, Camera, Image, ChevronRight, AlertTriangle, TrendingUp, HandMetal } from "lucide-react";
+import PappyAssistant from "@/components/PappyAssistant";
 
 interface HomeScreenProps {
   onScan: () => void;
@@ -45,6 +46,11 @@ const HomeScreen = ({ onScan, onEducation, onCaregiver, onDashboard }: HomeScree
             <p className="text-sm text-muted-foreground">You're protected</p>
           </div>
         </div>
+      </div>
+
+      {/* Pappy Assistant */}
+      <div className="mb-4">
+        <PappyAssistant state="greeting" size="md" />
       </div>
 
       {/* Before You Click — Primary CTA */}
