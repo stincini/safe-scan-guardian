@@ -1,7 +1,7 @@
 import { ArrowLeft, Shield, ShieldX, ShieldAlert, Bell, User } from "lucide-react";
 
 interface CaregiverScreenProps {
-  onBack: () => void;
+  onBack?: () => void;
 }
 
 const familyMembers = [
@@ -47,9 +47,11 @@ const CaregiverScreen = ({ onBack }: CaregiverScreenProps) => {
     <div className="px-6 pb-6">
       {/* Header */}
       <div className="pt-4 pb-2 flex items-center gap-3">
-        <button onClick={onBack} className="w-10 h-10 rounded-full bg-card shadow-card flex items-center justify-center active:scale-95 transition-transform">
-          <ArrowLeft className="w-5 h-5 text-foreground" />
-        </button>
+        {onBack && (
+          <button onClick={onBack} className="w-10 h-10 rounded-full bg-card shadow-card flex items-center justify-center active:scale-95 transition-transform">
+            <ArrowLeft className="w-5 h-5 text-foreground" />
+          </button>
+        )}
         <h1 className="text-lg font-bold font-display text-foreground">Family Dashboard</h1>
       </div>
 
