@@ -98,7 +98,7 @@ const CaregiverOnboardingScreen = ({ onBack, onComplete }: CaregiverOnboardingSc
               Enter Invite Code
             </h2>
             <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
-              Ask your family member to share their ScamShield caregiver invite code with you.
+              Ask your family member to share their Pappy caregiver invite code with you.
             </p>
             <input
               type="text"

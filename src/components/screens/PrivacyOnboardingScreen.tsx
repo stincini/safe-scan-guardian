@@ -42,7 +42,7 @@ const PrivacyOnboardingScreen = ({ onComplete }: PrivacyOnboardingScreenProps) =
             <Users className="w-10 h-10 text-primary" />
           </div>
           <h1 className="text-2xl font-bold font-display text-foreground text-center mb-2">
-            How will you use ScamShield?
+            How will you use Pappy?
           </h1>
           <p className="text-sm text-muted-foreground text-center mb-8 max-w-[280px] leading-relaxed">
             Choose your role. You can change this later in Settings.
@@ -113,7 +113,7 @@ const PrivacyOnboardingScreen = ({ onComplete }: PrivacyOnboardingScreenProps) =
           Your Privacy Comes First
         </h1>
         <p className="text-sm text-muted-foreground text-center mb-8 max-w-[280px] leading-relaxed">
-          ScamShield is designed to protect you without invading your privacy. Here's how:
+          Pappy is designed to protect you without invading your privacy. Here's how:
         </p>
 
         <div className="w-full space-y-3 mb-8">

@@ -1,5 +1,6 @@
-import { Shield, Camera, Image, ChevronRight, AlertTriangle, TrendingUp, HandMetal } from "lucide-react";
+import { Camera, Image, ChevronRight, AlertTriangle, TrendingUp, HandMetal } from "lucide-react";
 import PappyAssistant from "@/components/PappyAssistant";
+import pappyLogo from "@/assets/pappy-logo.png";
 
 interface HomeScreenProps {
   onScan: () => void;
@@ -38,11 +39,11 @@ const HomeScreen = ({ onScan, onEducation, onCaregiver, onDashboard }: HomeScree
       {/* Header */}
       <div className="pt-4 pb-4">
         <div className="flex items-center gap-3 mb-1">
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-            <Shield className="w-5 h-5 text-primary" />
+          <div className="w-10 h-10 rounded-full overflow-hidden">
+            <img src={pappyLogo} alt="Pappy logo" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h1 className="text-xl font-bold font-display text-foreground">ScamShield</h1>
+            <h1 className="text-xl font-bold font-display text-foreground">Pappy</h1>
             <p className="text-sm text-muted-foreground">You're protected</p>
           </div>
         </div>
