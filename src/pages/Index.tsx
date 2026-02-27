@@ -69,7 +69,7 @@ const Index = () => {
       case "lesson":
         return <LessonDetailScreen lessonId={activeLessonId} onBack={() => setActiveTab("education")} onComplete={() => {}} />;
       case "caregiver":
-        return <CaregiverScreen onBack={() => setActiveTab("home")} />;
+        return appMode === "caregiver" ? <CaregiverScreen /> : <CaregiverScreen onBack={() => setActiveTab("home")} />;
       case "dashboard":
         return <RiskDashboardScreen onBack={() => setActiveTab("home")} />;
       case "caregiver-onboarding":
