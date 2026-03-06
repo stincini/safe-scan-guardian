@@ -84,16 +84,6 @@ const ProtectedCaregiverScreen = ({ onCaregiverOnboarding }: ProtectedCaregiverS
               <ChevronRight className="w-4 h-4 text-muted-foreground" />
             </button>
 
-            <button className="w-full bg-card rounded-xl p-4 shadow-card active:scale-[0.98] transition-transform flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center shrink-0">
-                <Shield className="w-5 h-5 text-destructive" />
-              </div>
-              <div className="flex-1 text-left">
-                <p className="text-sm font-bold text-destructive">Remove Caregiver</p>
-                <p className="text-xs text-muted-foreground">You can always add one later</p>
-              </div>
-              <ChevronRight className="w-4 h-4 text-muted-foreground" />
-            </button>
           </div>
         </>
       ) : (
