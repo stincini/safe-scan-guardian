@@ -62,6 +62,10 @@ const ThresholdChip = ({ value, active, onSelect }: { value: string; active: boo
 );
 
 const CaregiverSettingsScreen = ({ onBack }: CaregiverSettingsScreenProps) => {
+  const [showInviteFlow, setShowInviteFlow] = useState(false);
+  const [inviteStep, setInviteStep] = useState<"phone" | "sending" | "sent">("phone");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [recipientName, setRecipientName] = useState("");
   const [threshold, setThreshold] = useState<number>(75);
   const [pushNotifs, setPushNotifs] = useState(true);
   const [emailNotifs, setEmailNotifs] = useState(false);
