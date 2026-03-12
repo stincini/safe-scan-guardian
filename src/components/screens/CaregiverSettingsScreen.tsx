@@ -223,6 +223,87 @@ const CaregiverSettingsScreen = ({ onBack }: CaregiverSettingsScreenProps) => {
           + Add custom template
         </button>
       </SettingsCard>
+
+      {/* Invite via SMS Overlay */}
+      {showInviteFlow && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setShowInviteFlow(false)} />
+          <div className="relative bg-card rounded-t-2xl w-full max-w-md p-5 pb-8 shadow-xl animate-in slide-in-from-bottom duration-300">
+            {inviteStep === "phone" && (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-base font-bold font-display text-foreground">Invite via Text Message</h3>
+                  <button onClick={() => setShowInviteFlow(false)} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                    <X className="w-4 h-4 text-muted-foreground" />
+                  </button>
+                </div>
+                <p className="text-[12px] text-muted-foreground mb-4">
+                  Send an invite to your loved one's phone. They'll receive a link to download and set up Pappy.
+                </p>
+                <div className="space-y-3 mb-5">
+                  <div>
+                    <label className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">Their Name</label>
+                    <input
+                      type="text"
+                      value={recipientName}
+                      onChange={(e) => setRecipientName(e.target.value)}
+                      placeholder="e.g. Mom, Dad, Grandma"
+                      className="w-full px-3 py-2.5 rounded-xl bg-muted text-[13px] text-foreground placeholder:text-muted-foreground border-none outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">Phone Number</label>
+                    <input
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      placeholder="+1 (555) 123-4567"
+                      className="w-full px-3 py-2.5 rounded-xl bg-muted text-[13px] text-foreground placeholder:text-muted-foreground border-none outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                  </div>
+                </div>
+                <button
+                  disabled={phoneNumber.length < 7 || recipientName.length < 1}
+                  onClick={() => {
+                    setInviteStep("sending");
+                    setTimeout(() => setInviteStep("sent"), 2000);
+                  }}
+                  className="w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center gap-2 disabled:opacity-40 active:scale-[0.98] transition-all"
+                >
+                  <Send className="w-4 h-4" />
+                  Send Invite
+                </button>
+              </>
+            )}
+
+            {inviteStep === "sending" && (
+              <div className="flex flex-col items-center py-8 gap-3">
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                <p className="text-sm font-semibold text-foreground">Sending invite to {recipientName}…</p>
+                <p className="text-[11px] text-muted-foreground">{phoneNumber}</p>
+              </div>
+            )}
+
+            {inviteStep === "sent" && (
+              <div className="flex flex-col items-center py-6 gap-3">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7 text-primary" />
+                </div>
+                <p className="text-base font-bold text-foreground">Invite Sent!</p>
+                <p className="text-[12px] text-muted-foreground text-center leading-snug max-w-[260px]">
+                  {recipientName} will receive a text at {phoneNumber} with a link to set up Pappy.
+                </p>
+                <button
+                  onClick={() => setShowInviteFlow(false)}
+                  className="mt-3 w-full py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold active:scale-[0.98] transition-transform"
+                >
+                  Done
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
