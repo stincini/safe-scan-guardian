@@ -118,7 +118,7 @@ const CaregiverSettingsScreen = ({ onBack }: CaregiverSettingsScreenProps) => {
           icon={UserPlus}
           title="Add Protected Account"
           subtitle="Link another family member"
-          onClick={() => {}}
+          onClick={() => { setShowInviteFlow(true); setInviteStep("phone"); setPhoneNumber(""); setRecipientName(""); }}
           compact
           border={false}
         />
