@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, UserPlus, Activity, Bell, BellRing, Shield, Eye, FileText, MessageSquare, Phone, ChevronRight, CreditCard, Landmark, BadgeAlert, Clock, BarChart3, Repeat, ToggleLeft } from "lucide-react";
+import { ArrowLeft, Users, UserPlus, Activity, Bell, BellRing, Shield, Eye, FileText, MessageSquare, Phone, ChevronRight, CreditCard, Landmark, BadgeAlert, Clock, BarChart3, Repeat, ToggleLeft, X, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 interface CaregiverSettingsScreenProps {
