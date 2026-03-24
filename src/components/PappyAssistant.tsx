@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import pappyMascot from "@/assets/pappy-mascot.png";
+
 
 export type PappyState = "idle" | "greeting" | "scanning" | "safe" | "suspicious" | "danger" | "teaching" | "celebrating";
 
@@ -81,14 +81,6 @@ const PappyAssistant = ({
 
   return (
     <div className={`flex items-end ${s.wrapper} ${className} ${isVisible ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}>
-      {/* Mascot image */}
-      <div className={`${s.image} rounded-full overflow-hidden shrink-0 ${stateAnimations[state]}`}>
-        <img
-          src={pappyMascot}
-          alt="Pappy assistant"
-          className="w-full h-full object-cover"
-        />
-      </div>
 
       {/* Speech bubble */}
       <div className={`${stateBubbleStyles[state]} ${s.bubble} rounded-2xl rounded-bl-md px-3 py-2 font-semibold shadow-card`}>
